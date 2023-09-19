@@ -15,15 +15,15 @@
 
 
 
-  <div id="img_div">
-    <img src="" id="img" alt="模型没有预测这种情况" hidden="true" style="">
+  <div id="img_div" hidden="true">
+    <img src="" id="img" alt="模型没有预测这种情况" hidden="true" onerror="this.src='img/onerror.png'">
   </div>
 
   <div class="clean"></div>
 
   <div id="container">
 
-    <span id="selection">
+    <span id="selection" hidden="true">
       <i>&nbsp;&nbsp;&nbsp;label</i>
       <select id="label">
         <option value="none" selected disabled hidden>请选择</option> 
@@ -62,10 +62,14 @@
     function removeDiv() {
       var div = document.getElementById("headline");
       div.remove();
+      document.getElementById("img_div").hidden = false;
       document.getElementById("img").hidden = false;
+      document.getElementById("selection").hidden = false;
+      document.getElementById('img').src='./img/firstpage.png';
+
     }
     
-    // 切换到图片1
+    // 按钮切换到图片1
     function switchTo1(label, pred) {
       img_src = "./img/" + label_val + "_" + pred_val + "_0.png";
       document.getElementById("button1").style.backgroundColor = "#4d4d4d";
@@ -74,7 +78,7 @@
       $('#img').attr('src', img_src);
     }
 
-    // 切换到图片2
+    // 按钮切换到图片2
     function switchTo2(label, pred) {
       img_src = "./img/" + label_val + "_" + pred_val + "_1.png";
       document.getElementById("button2").style.backgroundColor = "#4d4d4d";
@@ -83,7 +87,7 @@
       $('#img').attr('src', img_src);
     }
 
-    // 切换到图片2
+    // 按钮切换到图片3
     function switchTo3(label, pred) {
       img_src = "./img/" + label_val + "_" + pred_val + "_2.png";
       document.getElementById("button3").style.backgroundColor = "#4d4d4d";
