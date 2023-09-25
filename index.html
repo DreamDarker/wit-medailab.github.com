@@ -129,18 +129,29 @@
         change() {
           console.log(this.value);
         },
+        // 预缓存图片
         preloadImages() {
-          // 开始预缓存图片
-          this.preloadImage('./img/0_0.jpg');
-          this.preloadImage('./img/0_1.jpg');
-          this.preloadImage('./img/1_0.jpg');
-          this.preloadImage('./img/1_1.jpg');
-          this.preloadImage('./img/1_2_0.jpg');
-          this.preloadImage('./img/1_2_1.jpg');
-          this.preloadImage('./img/2_1_0.jpg');
-          this.preloadImage('./img/2_1_1.jpg');
-          this.preloadImage('./img/2_1_2.jpg');
-          this.preloadImage('./img/2_2.jpg');
+          let imgs = [
+          "./img/0_0.png",
+          "./img/0_1.png",
+          "./img/1_0.png",
+          "./img/1_1.png",
+          "./img/1_2_0.png",
+          "./img/1_2_1.png",
+          "./img/2_1_0.png",
+          "./img/2_1_1.png",
+          "./img/2_1_2.png",
+          "./img/2_2.png",
+          ]
+
+          for (let img of imgs) {
+            let image = new Image()
+            image.src = img
+            image.onload = () => {
+              this.count++
+            }
+          }
+
         },
       },
       watch: {
