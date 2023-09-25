@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    /* 加载前 */
+    .el-image__placeholder {
+      background: url('./loadingImg/009.gif') no-repeat 50% 50% !important;
+      background-size: 50% !important;
+    }
+    
+  </style>
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
@@ -32,7 +40,7 @@
     <!-- 图片显示 -->
     <div style="text-align: center;display: block;">
       <el-image id="image" ref="img" style="width: auto;max-width: 90%;max-height:55%;border: 10px;border-style: solid;border-color: transparent;" src="./img/firstpage.png">
-        <div slot="error" class="image-slot">
+        <div slot="placeholder" class="image-slot">
           <i class="el-icon-picture-outline"></i>
         </div>
       </el-image>
