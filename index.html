@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <style>
+  <!-- <style>
     /* 加载前 */
     .el-image__placeholder {
-      background: url('./loadingImg/009.gif') no-repeat 50% 50% !important;
+      background: url('./img/loading.gif') no-repeat 50% 50% !important;
       background-size: 50% !important;
     }
     
-  </style>
+  </style> -->
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
@@ -69,9 +69,21 @@
 
   <script>
 
+    function preloadImage(url) {
+      var img = new Image();
+      img.src = url;
+      img.onload = function() {
+        // 图片加载完成后执行的操作
+      };
+    }
+
     // var imgUrl = "../img/0_0.png"
     const app = new Vue({
       el: '#main',
+      mounted() {
+        // 等待页面加载完成后再开始预缓存图片
+        window.addEventListener('load', this.preloadImages);
+      },
       data() {
         return {
           // 图片路径
@@ -116,7 +128,20 @@
         // 获取最新的选项值
         change() {
           console.log(this.value);
-        }
+        },
+        preloadImages() {
+          // 开始预缓存图片
+          this.preloadImage('./img/0_0.jpg');
+          this.preloadImage('./img/0_1.jpg');
+          this.preloadImage('./img/1_0.jpg');
+          this.preloadImage('./img/1_1.jpg');
+          this.preloadImage('./img/1_2_0.jpg');
+          this.preloadImage('./img/1_2_1.jpg');
+          this.preloadImage('./img/2_1_0.jpg');
+          this.preloadImage('./img/2_1_1.jpg');
+          this.preloadImage('./img/2_1_2.jpg');
+          this.preloadImage('./img/2_2.jpg');
+        },
       },
       watch: {
         // 监听 el-select 选项值的变化
