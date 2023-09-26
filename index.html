@@ -15,17 +15,17 @@
 </head>
 
 <body>
-  <el-row>
-    <p style="text-align: center;font-size: 25px;margin: 10px;margin-top: 20px;">
-      Clinical implication of the multimodal nomogram
-    </p>
-  </el-row>
+  <div style="background-color: #e7e7e7;vertical-align: middle;height: 80px;margin: 20px;text-align: center;">
+      <h1 style="margin: 0px;line-height: 80px;">
+        Clinical Implications of the Multimodal Nomogram for Predicting PCa Risk Stratification
+      </h1>
+  </div>
 
   <div id="main">
-    <div>
+    <div style="border: 20px;">
       <template>
         <span style="margin-left: 30px;">Please select a patient: 
-          <el-select ref="item_selected" v-model="value" filterable placeholder="请选择" style="width: 150px;">
+          <el-select ref="item_selected" v-model="value" filterable placeholder="Please select" style="width: 150px;">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -38,25 +38,28 @@
     </div>
 
     <!-- 图片显示 -->
-    <div style="text-align: center;display: block;">
-      <el-image id="image" ref="img" style="width: auto;max-width: 90%;max-height:55%;border: 10px;border-style: solid;border-color: transparent;" src="./img/firstpage.png">
+    <div style="text-align: center;display: block;margin: 30px;">
+      <el-image id="image" ref="img" style="width: auto;max-width: 1400px;border: 10px;border-style: solid;border-color: transparent;" src="./img/firstpage.png">
         <div slot="placeholder" class="image-slot">
           <i class="el-icon-picture-outline"></i>
         </div>
       </el-image>
     </div>
 
-    <div>
-      <span style="margin-left: 30px;text-align: center;">Prediction of the multimodal nomogram: </span>
-      <el-tag id="nomo" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag>
-      <br/>
-      <span style="margin-left: 30px;margin-right: 16.44px;text-align: center;">Assinment according to EAU guideline: </span>
-      <el-tag id="eau" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag>
+    <div style="text-align:center">
+      <el-row>
+        <span style="text-align: center;">Risk prediction of the multimodal nomogram: </span>
+        <!-- <el-tag id="nomo" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag> -->
+        <el-tag effect="dark" id="nomo" type="info" style="margin-right: 200px;width: 124px;text-align: center;">unknown</el-tag>
+        <span style="text-align: center;">Risk Assignment according to EAU guideline: </span>
+        <el-tag effect="dark" id="eau" type="info" style="width: 124px;text-align: center;">unknown</el-tag>
+      </el-row>
     </div>
+    <div style="position: absolute;right: 0;bottom: 0;">
       <p style="text-align: right;font-size: 10px;margin: 5px;">For any inquiry, please contact us at xwu@wit.edu.cn</p>
       <p style="text-align: right;font-size: 10px;margin: 5px;">Copyright @ MedAILab in Wuhan Institute of Technology</p>
       <p style="text-align: right;font-size: 10px;margin: 5px;">All Right Reserved</p>
-
+    </div>
 
   </div>
 
@@ -78,6 +81,8 @@
     // }
 
     // var imgUrl = "../img/0_0.png"
+
+
     const app = new Vue({
       el: '#main',
       mounted() {
@@ -125,6 +130,23 @@
         }
       },
       methods: {
+        // 
+        formatTagType(state) {
+          switch (state) {
+            case 0: 
+              return 'success';
+              break;
+            case 1:
+              return 'warning';
+              break;
+            case 2:
+              return 'danger';
+              break;
+            case 3:
+              return 'info';
+              break;
+          }
+        },
         // 获取最新的选项值
         change() {
           console.log(this.value);
@@ -168,8 +190,8 @@
               nomo.innerText = "lower_risk";
               eau.innerText = "lower_risk";
               // TODO: 按内容同步修改tag的颜色
-              // nomo.setAttribute("type","success");
-              // eau.setAttribute("type","success");
+              nomo.setAttribute("type","success");
+              eau.setAttribute("type","success");
               break;
             }
             case 'B': {
