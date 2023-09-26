@@ -15,8 +15,8 @@
 </head>
 
 <body>
-  <div style="background-color: #e7e7e7;vertical-align: middle;height: 80px;margin: 20px;text-align: center;">
-      <h1 style="margin: 0px;line-height: 80px;">
+  <div style="vertical-align: middle;height: 60px;margin: 20px;margin-bottom: 40px;text-align: center;box-shadow: 0 10px 5px -5px #dddddd;">
+      <h1 style="margin: 0px;line-height: 60px;">
         Clinical Implications of the Multimodal Nomogram for Predicting PCa Risk Stratification
       </h1>
   </div>
@@ -38,7 +38,7 @@
     </div>
 
     <!-- 图片显示 -->
-    <div style="text-align: center;display: block;margin: 30px;">
+    <div style="text-align: center;display: block;margin: 20px;">
       <el-image id="image" ref="img" style="width: auto;max-width: 1400px;border: 10px;border-style: solid;border-color: transparent;" src="./img/firstpage.png">
         <div slot="placeholder" class="image-slot">
           <i class="el-icon-picture-outline"></i>
@@ -46,16 +46,16 @@
       </el-image>
     </div>
 
-    <div style="text-align:center">
+    <div style="text-align:center;margin: 20px;">
       <el-row>
         <span style="text-align: center;">Risk prediction of the multimodal nomogram: </span>
         <!-- <el-tag id="nomo" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag> -->
-        <el-tag effect="dark" id="nomo" type="info" style="margin-right: 200px;width: 124px;text-align: center;">unknown</el-tag>
+        <el-tag effect="dark" id="nomo" ref="nomo" :type="nomo_tag" v-model="nomo_tag" style="margin-right: 200px;width: 124px;text-align: center;">unknown</el-tag>
         <span style="text-align: center;">Risk Assignment according to EAU guideline: </span>
-        <el-tag effect="dark" id="eau" type="info" style="width: 124px;text-align: center;">unknown</el-tag>
+        <el-tag effect="dark" id="eau" ref="eau" :type="eau_tag" v-model="eau_tag" style="width: 124px;text-align: center;">unknown</el-tag>
       </el-row>
     </div>
-    <div style="position: absolute;right: 0;bottom: 0;">
+    <div style="position: relative;right: 0;bottom: 0;margin-top: 30px;">
       <p style="text-align: right;font-size: 10px;margin: 5px;">For any inquiry, please contact us at xwu@wit.edu.cn</p>
       <p style="text-align: right;font-size: 10px;margin: 5px;">Copyright @ MedAILab in Wuhan Institute of Technology</p>
       <p style="text-align: right;font-size: 10px;margin: 5px;">All Right Reserved</p>
@@ -67,6 +67,7 @@
 
   <!-- import Vue before Element -->
   <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
@@ -81,7 +82,9 @@
     // }
 
     // var imgUrl = "../img/0_0.png"
-
+    
+    // var nomo_tag = document.getElementById("nomo");
+    // var eau_tag = document.getElementById("eau");
 
     const app = new Vue({
       el: '#main',
@@ -89,8 +92,12 @@
         // 等待页面加载完成后再开始预缓存图片
         window.addEventListener('load', this.preloadImages);
       },
+
       data() {
         return {
+          nomo_tag: "info",
+          eau_tag: "info",
+
           // 图片路径
           image_path: "./img/firstpage.png",
 
@@ -125,45 +132,142 @@
           }, {
             value: 'J',
             label: 'Patient J'
-          }],
+          }, {
+            value: 'L',
+            label: 'Patient L'
+          }, {
+            value: 'M',
+            label: 'Patient M'
+          }, {
+            value: 'N',
+            label: 'Patient N'
+          }, {
+            value: 'O',
+            label: 'Patient O'
+          }, {
+            value: 'P',
+            label: 'Patient P'
+          }, {
+            value: 'Q',
+            label: 'Patient Q'
+          }, {
+            value: 'R',
+            label: 'Patient R'
+          }, {
+            value: 'S',
+            label: 'Patient S'
+          }, {
+            value: 'T',
+            label: 'Patient T'
+          }, 
+        
+        ],
           value: ''
         }
       },
+
       methods: {
-        // 
-        formatTagType(state) {
-          switch (state) {
-            case 0: 
-              return 'success';
-              break;
-            case 1:
-              return 'warning';
-              break;
-            case 2:
-              return 'danger';
-              break;
-            case 3:
-              return 'info';
-              break;
-          }
+        // changeType(nomo_val, eau_val) {
+        //   // 获取当前 el-tag 的 type 属性值
+        //   // const currentType = this.type;
+        //   // 将 type 属性值修改为新的值
+        //   switch (nomo_val) {
+        //     case 0:
+        //       // nomo_tag.style.borderColor = "#409eff";
+        //       // nomo_tag.style.backgroundColor = "#409eff";
+        //       // nomo_tag.style.backgroundColor = rgb()
+        //       bgcolor = "#409eff";
+        //       bdcolor = "#409eff";
+        //       break;
+        //     case 1:
+        //       nomo_tag.style.borderColor = "#e6a23c";
+        //       nomo_tag.style.backgroundColor = "#e6a23c";
+        //       break;
+        //     case 2:
+        //       nomo_tag.style.borderColor = "#f56c6c";
+        //       nomo_tag.style.backgroundColor = "#f56c6c";
+        //       break;
+        //     case 3:
+        //       nomo_tag.style.borderColor = "#909399";
+        //       nomo_tag.style.backgroundColor = "#909399";
+        //       break;
+        //   }
+          
+        //   console.log(nomo_tag.style.backgroundColor);
+          
+        //   // this.type = currentType === "primary" ? "success" : "primary";
+        //   // 更新 el-tag 的 type 属性值
+        // },
+        //   // 
+        // formatTagType(state) {
+        //   switch (state) {
+        //     case '0': 
+        //       return 'success';
+        //       break;
+        //     case 1:
+        //       return 'warning';
+        //       break;
+        //     case 2:
+        //       return 'danger';
+        //       break;
+        //     case 3:
+        //       return 'info';
+        //       break;
+        //   }
+        // },
+
+        nomotagLow() {
+          this.nomo_tag = 'success';
         },
+
+        eautagLow() {
+          this.eau_tag = 'success';
+        },
+
+        nomotagIntermediate() {
+          this.nomo_tag = 'warning';
+        },
+        
+        eautagIntermediate() {
+          this.eau_tag = 'warning';
+        },
+
+        nomotagHigh() {
+          this.nomo_tag = 'danger';
+        },
+        
+        eautagHigh() {
+          this.eau_tag = 'danger';
+        },
+
         // 获取最新的选项值
         change() {
           console.log(this.value);
         },
+
         // 预缓存图片
         preloadImages() {
           let imgs = [
-          "./img/0_0.png",
+          "./img/0_0_0.png",
+          "./img/0_0_1.png",
+          "./img/0_0_2.png",
+          "./img/0_0_3.png",
           "./img/0_1.png",
           "./img/1_0.png",
-          "./img/1_1.png",
+          "./img/1_1_0.png",
+          "./img/1_1_1.png",
+          "./img/1_1_2.png",
           "./img/1_2_0.png",
           "./img/1_2_1.png",
           "./img/2_1_0.png",
           "./img/2_1_1.png",
           "./img/2_1_2.png",
-          "./img/2_2.png",
+          "./img/2_2_0.png",
+          "./img/2_2_1.png",
+          "./img/2_2_2.png",
+          "./img/2_2_3.png",
+          "./img/2_2_4.png",
+          "./img/2_2_5.png",
           ]
 
           for (let img of imgs) {
@@ -173,8 +277,8 @@
               this.count++
             }
           }
-
         },
+
       },
       watch: {
         // 监听 el-select 选项值的变化
@@ -186,75 +290,168 @@
           var eau = document.getElementById("eau");
           switch (val) {
             case 'A': {
-              img.src = "./img/0_0.png";
-              nomo.innerText = "lower_risk";
-              eau.innerText = "lower_risk";
-              // TODO: 按内容同步修改tag的颜色
-              nomo.setAttribute("type","success");
-              eau.setAttribute("type","success");
+              img.src = "./img/0_0_0.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
               break;
             }
             case 'B': {
-              img.src = "./img/0_1.png";
-              nomo.innerText = "intermediate_risk";
-              eau.innerText = "lower_risk";
+              img.src = "./img/0_0_1.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
               break;
             }
             case 'C': {
-              img.src = "./img/1_0.png";
-              nomo.innerText = "lower_risk";
-              eau.innerText = "intermediate_risk";
+              img.src = "./img/0_0_2.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
               break;
             }
             case 'D': {
-              img.src = "./img/1_1.png";
-              nomo.innerText = "intermediate_risk";
-              eau.innerText = "intermediate_risk";
+              img.src = "./img/0_0_3.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
               break;
             }
             case 'E': {
-              img.src = "./img/1_2_0.png";
-              nomo.innerText = "high_risk";
-              eau.innerText = "intermediate_risk";
+              img.src = "./img/0_1.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Intermediate";
+              this.eautagLow();
+              this.nomotagIntermediate();
               break;
             }
             case 'F': {
-              img.src = "./img/1_2_1.png";
-              nomo.innerText = "high_risk";
-              eau.innerText = "intermediate_risk";
+              img.src = "./img/1_0.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "Low";
+              this.eautagIntermediate();
+              this.nomotagLow();
               break;
             }
             case 'G': {
-              img.src = "./img/2_1_0.png";
-              nomo.innerText = "intermediate_risk";
-              eau.innerText = "high_risk";
+              img.src = "./img/1_1_0.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "Intermediate";
+              this.eautagIntermediate();
+              this.nomotagIntermediate();
               break;
             }
             case 'H': {
-              img.src = "./img/2_1_1.png";
-              nomo.innerText = "intermediate_risk";
-              eau.innerText = "high_risk";
+              img.src = "./img/1_1_1.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "Intermediate";
+              this.eautagIntermediate();
+              this.nomotagIntermediate();
               break;
             }
             case 'I': {
-              img.src = "./img/2_1_2.png";
-              nomo.innerText = "intermediate_risk";
-              eau.innerText = "high_risk";
+              img.src = "./img/1_1_2.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "Intermediate";
+              this.eautagIntermediate();
+              this.nomotagIntermediate();
               break;
             }
             case 'J': {
-              img.src = "./img/2_2.png";
-              nomo.innerText = "high_risk";
-              eau.innerText = "high_risk";
+              img.src = "./img/1_2_0.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "High";
+              this.eautagIntermediate();
+              this.nomotagHigh();
+              break;
+            }
+            case 'K': {
+              img.src = "./img/1_2_1.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "High";
+              this.eautagIntermediate();
+              this.nomotagHigh();
+              break;
+            }
+            case 'L': {
+              img.src = "./img/2_1_0.png";
+              eau.innerText = "High";
+              nomo.innerText = "Intermediate";
+              this.eautagHigh();
+              this.nomotagIntermediate();
+              break;
+            }
+            case 'M': {
+              img.src = "./img/2_1_1.png";
+              eau.innerText = "High";
+              nomo.innerText = "Intermediate";
+              this.eautagHigh();
+              this.nomotagIntermediate();
+              break;
+            }
+            case 'N': {
+              img.src = "./img/2_1_2.png";
+              eau.innerText = "High";
+              nomo.innerText = "Intermediate";
+              this.eautagHigh();
+              this.nomotagIntermediate();
+              break;
+            }
+            case 'O': {
+              img.src = "./img/2_2_0.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'P': {
+              img.src = "./img/2_2_1.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'Q': {
+              img.src = "./img/2_2_2.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'R': {
+              img.src = "./img/2_2_3.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'S': {
+              img.src = "./img/2_2_4.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'T': {
+              img.src = "./img/2_2_5.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
               break;
             }
           }
         }
       }
     });
-
-
   </script>
-
-  
 </html>
