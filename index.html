@@ -1,154 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <!-- <style>
+    /* 加载前 */
+    .el-image__placeholder {
+      background: url('./img/loading.gif') no-repeat 50% 50% !important;
+      background-size: 50% !important;
+    }
+    
+  </style> -->
 <head>
   <meta charset="UTF-8">
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css">
 </head>
+
 <body>
+  <el-row>
+    <p style="text-align: center;font-size: 25px;margin: 10px;margin-top: 20px;">
+      Clinical implication of the multimodal nomogram
+    </p>
+  </el-row>
 
-  <div id="headline" onclick="removeDiv()">
-    <h1>Interpretable analysis of the multimodal nomogram for predictions of PCa risk stratifications</h1>
-    <br/>
-    <h3>Click anywhere to continue</h3>
+  <div id="main">
+    <div>
+      <template>
+        <span style="margin-left: 30px;">Please select a patient: 
+          <el-select ref="item_selected" v-model="value" filterable placeholder="请选择" style="width: 150px;">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :value="item.value"
+              :label="item.label">
+            </el-option>
+          </el-select>
+        </span>
+      </template>
+    </div>
+
+    <!-- 图片显示 -->
+    <div style="text-align: center;display: block;">
+      <el-image id="image" ref="img" style="width: auto;max-width: 90%;max-height:55%;border: 10px;border-style: solid;border-color: transparent;" src="./img/firstpage.png">
+        <div slot="placeholder" class="image-slot">
+          <i class="el-icon-picture-outline"></i>
+        </div>
+      </el-image>
+    </div>
+
+    <div>
+      <span style="margin-left: 30px;text-align: center;">Prediction of the multimodal nomogram: </span>
+      <el-tag id="nomo" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag>
+      <br/>
+      <span style="margin-left: 30px;margin-right: 16.44px;text-align: center;">Assinment according to EAU guideline: </span>
+      <el-tag id="eau" type="info" style="width: 124px;text-align: center;background-color: #cfcfcf;color: #242424;">unknown</el-tag>
+    </div>
+      <p style="text-align: right;font-size: 10px;margin: 5px;">For any inquiry, please contact us at xwu@wit.edu.cn</p>
+      <p style="text-align: right;font-size: 10px;margin: 5px;">Copyright @ MedAILab in Wuhan Institute of Technology</p>
+      <p style="text-align: right;font-size: 10px;margin: 5px;">All Right Reserved</p>
+
+
   </div>
 
-
-
-  <div id="img_div" hidden="true">
-    <img src="" id="img" alt="The model did not predict this" hidden="true" onerror="this.src='img/onerror.png'">
-  </div>
-
-  <div class="clean"></div>
-
-  <div id="container">
-
-    <span id="selection" hidden="true">
-      <i>&nbsp;&nbsp;&nbsp;label</i>
-      <select id="label">
-        <option value="none" selected disabled hidden>please select</option> 
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-      </select>
-
-      <i>&nbsp;&nbsp;pred</i>
-      <select id="pred">
-        <option value="none" selected disabled hidden>please select</option> 
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-      </select>
-    </span>
-
-    <span id="switch_img" >
-      <button id="button1" hidden="true" onclick="switchTo1(label_val,pred_val)">1</button>
-      <button id="button2" hidden="true" onclick="switchTo2(label_val,pred_val)">2</button>
-      <button id="button3" hidden="true" onclick="switchTo3(label_val,pred_val)">3</button>
-    </span>
-
-  </div>
-
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script>
-    // 定义label，pred的值和img路径
-    var label_val, pred_val, img_src;
-
-    // 首页面元素删除，并开启图片div显示
-    function removeDiv() {
-      var div = document.getElementById("headline");
-      div.remove();
-      document.getElementById("img_div").hidden = false;
-      document.getElementById("img").hidden = false;
-      document.getElementById("selection").hidden = false;
-      document.getElementById('img').src='./img/firstpage.png';
-
-    }
-    
-    // 按钮切换到图片1
-    function switchTo1(label, pred) {
-      img_src = "./img/" + label_val + "_" + pred_val + "_0.png";
-      document.getElementById("button1").style.backgroundColor = "#4d4d4d";
-      document.getElementById("button2").style.backgroundColor = "#e7e7e7";
-      document.getElementById("button3").style.backgroundColor = "#e7e7e7";
-      $('#img').attr('src', img_src);
-    }
-
-    // 按钮切换到图片2
-    function switchTo2(label, pred) {
-      img_src = "./img/" + label_val + "_" + pred_val + "_1.png";
-      document.getElementById("button2").style.backgroundColor = "#4d4d4d";
-      document.getElementById("button1").style.backgroundColor = "#e7e7e7";
-      document.getElementById("button3").style.backgroundColor = "#e7e7e7";
-      $('#img').attr('src', img_src);
-    }
-
-    // 按钮切换到图片3
-    function switchTo3(label, pred) {
-      img_src = "./img/" + label_val + "_" + pred_val + "_2.png";
-      document.getElementById("button3").style.backgroundColor = "#4d4d4d";
-      document.getElementById("button2").style.backgroundColor = "#e7e7e7";
-      document.getElementById("button1").style.backgroundColor = "#e7e7e7";
-      $('#img').attr('src', img_src);
-    }
-    
-    // 按数显示按钮
-    function buttonHidden(num, flag) {
-      // flag==false时显示按钮
-      // flag==true时隐藏按钮
-      if (num == 2) {
-        document.getElementById("button1").hidden = flag;
-        document.getElementById("button2").hidden = flag;
-      }
-      else if (num == 3) {
-        document.getElementById("button1").hidden = flag;
-        document.getElementById("button2").hidden = flag;
-        document.getElementById("button3").hidden = flag;
-      }
-    }
-
-    // 改变label或pred的同时改变图片的输出
-    $(function() {
-      // label选择
-      $('#label').on('change', function() {
-        label_val = $(this).val();
-        img_src = "./img/" + label_val + "_" + pred_val + ".png";
-        $('#img').attr('src', img_src);
-        // 同参数下多图片的显示
-        // TODO: 
-        // label=1,pred=2 显示1、2按钮
-        if (label_val == 1 && pred_val == 2) {
-          switchTo1(label_val,pred_val);
-          buttonHidden(2, false);
-        }
-        // label=2,pred=1 显示1、2、3按钮
-        else if (label_val == 2 && pred_val == 1) {
-          switchTo1(label_val,pred_val);
-          buttonHidden(3, false);
-        }
-        else buttonHidden(3, true);
-      });
-
-      // pred选择
-      $('#pred').on('change', function() {
-        pred_val = $(this).val();
-        img_src = "./img/" + label_val + "_" + pred_val + ".png";
-        $('#img').attr('src', img_src);
-        if (label_val == 1 && pred_val == 2) {
-          switchTo1(label_val,pred_val);
-          buttonHidden(2, false);
-        }
-        else if (label_val == 2 && pred_val == 1) {
-          switchTo1(label_val,pred_val);
-          buttonHidden(3, false);
-        }
-        else buttonHidden(3, true);
-      });
-    });
-  </script>
 </body>
+
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+  <script>
+
+    function preloadImage(url) {
+      var img = new Image();
+      img.src = url;
+      img.onload = function() {
+        // 图片加载完成后执行的操作
+      };
+    }
+
+    // var imgUrl = "../img/0_0.png"
+    const app = new Vue({
+      el: '#main',
+      mounted() {
+        // 等待页面加载完成后再开始预缓存图片
+        window.addEventListener('load', this.preloadImages);
+      },
+      data() {
+        return {
+          // 图片路径
+          image_path: "./img/firstpage.png",
+
+          // 选项内容
+          options: [{
+            value: 'A',
+            label: 'Patient A'
+          }, {
+            value: 'B',
+            label: 'Patient B'
+          }, {
+            value: 'C',
+            label: 'Patient C'
+          }, {
+            value: 'D',
+            label: 'Patient D'
+          }, {
+            value: 'E',
+            label: 'Patient E'
+          }, {
+            value: 'F',
+            label: 'Patient F'
+          }, {
+            value: 'G',
+            label: 'Patient G'
+          }, {
+            value: 'H',
+            label: 'Patient H'
+          }, {
+            value: 'I',
+            label: 'Patient I'
+          }, {
+            value: 'J',
+            label: 'Patient J'
+          }],
+          value: ''
+        }
+      },
+      methods: {
+        // 获取最新的选项值
+        change() {
+          console.log(this.value);
+        },
+        // 预缓存图片
+        preloadImages() {
+          let imgs = [
+          "./img/0_0.png",
+          "./img/0_1.png",
+          "./img/1_0.png",
+          "./img/1_1.png",
+          "./img/1_2_0.png",
+          "./img/1_2_1.png",
+          "./img/2_1_0.png",
+          "./img/2_1_1.png",
+          "./img/2_1_2.png",
+          "./img/2_2.png",
+          ]
+
+          for (let img of imgs) {
+            let image = new Image()
+            image.src = img
+            image.onload = () => {
+              this.count++
+            }
+          }
+
+        },
+      },
+      watch: {
+        // 监听 el-select 选项值的变化
+        value(val) {
+          // 执行回调函数
+          this.change();
+          var img = document.getElementById("image");
+          var nomo = document.getElementById("nomo");
+          var eau = document.getElementById("eau");
+          switch (val) {
+            case 'A': {
+              img.src = "./img/0_0.png";
+              nomo.innerText = "lower_risk";
+              eau.innerText = "lower_risk";
+              // TODO: 按内容同步修改tag的颜色
+              // nomo.setAttribute("type","success");
+              // eau.setAttribute("type","success");
+              break;
+            }
+            case 'B': {
+              img.src = "./img/0_1.png";
+              nomo.innerText = "intermediate_risk";
+              eau.innerText = "lower_risk";
+              break;
+            }
+            case 'C': {
+              img.src = "./img/1_0.png";
+              nomo.innerText = "lower_risk";
+              eau.innerText = "intermediate_risk";
+              break;
+            }
+            case 'D': {
+              img.src = "./img/1_1.png";
+              nomo.innerText = "intermediate_risk";
+              eau.innerText = "intermediate_risk";
+              break;
+            }
+            case 'E': {
+              img.src = "./img/1_2_0.png";
+              nomo.innerText = "high_risk";
+              eau.innerText = "intermediate_risk";
+              break;
+            }
+            case 'F': {
+              img.src = "./img/1_2_1.png";
+              nomo.innerText = "high_risk";
+              eau.innerText = "intermediate_risk";
+              break;
+            }
+            case 'G': {
+              img.src = "./img/2_1_0.png";
+              nomo.innerText = "intermediate_risk";
+              eau.innerText = "high_risk";
+              break;
+            }
+            case 'H': {
+              img.src = "./img/2_1_1.png";
+              nomo.innerText = "intermediate_risk";
+              eau.innerText = "high_risk";
+              break;
+            }
+            case 'I': {
+              img.src = "./img/2_1_2.png";
+              nomo.innerText = "intermediate_risk";
+              eau.innerText = "high_risk";
+              break;
+            }
+            case 'J': {
+              img.src = "./img/2_2.png";
+              nomo.innerText = "high_risk";
+              eau.innerText = "high_risk";
+              break;
+            }
+          }
+        }
+      }
+    });
+
+
+  </script>
+
+  
 </html>
