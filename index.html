@@ -159,7 +159,31 @@
           }, {
             value: 'T',
             label: 'Patient T'
+          }, {
+            value: 'U',
+            label: 'Patient U'
           }, 
+          {
+            value: 'V',
+            label: 'Patient V'
+          }, 
+          {
+            value: 'W',
+            label: 'Patient W'
+          }, 
+          {
+            value: 'X',
+            label: 'Patient X'
+          }, 
+          {
+            value: 'Y',
+            label: 'Patient Y'
+          }, 
+          {
+            value: 'Z',
+            label: 'Patient Z'
+          }, 
+        
         
         ],
           value: ''
@@ -252,22 +276,28 @@
           "./img/0_0_1.png",
           "./img/0_0_2.png",
           "./img/0_0_3.png",
+          "./img/0_0_4.png",
+          "./img/0_0_5.png",
+          "./img/0_0_6.png",
           "./img/0_1.png",
           "./img/1_0.png",
           "./img/1_1_0.png",
           "./img/1_1_1.png",
           "./img/1_1_2.png",
-          "./img/1_2_0.png",
-          "./img/1_2_1.png",
+          "./img/1_1_3.png",
+          "./img/1_1_4.png",
+          "./img/1_1_5.png",
           "./img/2_1_0.png",
-          "./img/2_1_1.png",
-          "./img/2_1_2.png",
           "./img/2_2_0.png",
           "./img/2_2_1.png",
           "./img/2_2_2.png",
           "./img/2_2_3.png",
           "./img/2_2_4.png",
           "./img/2_2_5.png",
+          "./img/2_2_6.png",
+          "./img/2_2_7.png",
+          "./img/2_2_8.png",
+          "./img/2_2_9.png",
           ]
 
           for (let img of imgs) {
@@ -322,6 +352,30 @@
               break;
             }
             case 'E': {
+              img.src = "./img/0_0_4.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
+              break;
+            }
+            case 'F': {
+              img.src = "./img/0_0_5.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
+              break;
+            }
+            case 'G': {
+              img.src = "./img/0_0_6.png";
+              eau.innerText = "Low";
+              nomo.innerText = "Low";
+              this.eautagLow();
+              this.nomotagLow();
+              break;
+            }
+            case 'H': {
               img.src = "./img/0_1.png";
               eau.innerText = "Low";
               nomo.innerText = "Intermediate";
@@ -329,7 +383,7 @@
               this.nomotagIntermediate();
               break;
             }
-            case 'F': {
+            case 'I': {
               img.src = "./img/1_0.png";
               eau.innerText = "Intermediate";
               nomo.innerText = "Low";
@@ -337,7 +391,7 @@
               this.nomotagLow();
               break;
             }
-            case 'G': {
+            case 'J': {
               img.src = "./img/1_1_0.png";
               eau.innerText = "Intermediate";
               nomo.innerText = "Intermediate";
@@ -345,7 +399,7 @@
               this.nomotagIntermediate();
               break;
             }
-            case 'H': {
+            case 'K': {
               img.src = "./img/1_1_1.png";
               eau.innerText = "Intermediate";
               nomo.innerText = "Intermediate";
@@ -353,7 +407,7 @@
               this.nomotagIntermediate();
               break;
             }
-            case 'I': {
+            case 'L': {
               img.src = "./img/1_1_2.png";
               eau.innerText = "Intermediate";
               nomo.innerText = "Intermediate";
@@ -361,23 +415,31 @@
               this.nomotagIntermediate();
               break;
             }
-            case 'J': {
-              img.src = "./img/1_2_0.png";
+            case 'M': {
+              img.src = "./img/1_1_3.png";
               eau.innerText = "Intermediate";
-              nomo.innerText = "High";
+              nomo.innerText = "Intermediate";
               this.eautagIntermediate();
-              this.nomotagHigh();
+              this.nomotagIntermediate();
               break;
             }
-            case 'K': {
-              img.src = "./img/1_2_1.png";
+            case 'N': {
+              img.src = "./img/1_1_4.png";
               eau.innerText = "Intermediate";
-              nomo.innerText = "High";
+              nomo.innerText = "Intermediate";
               this.eautagIntermediate();
-              this.nomotagHigh();
+              this.nomotagIntermediate();
               break;
             }
-            case 'L': {
+            case 'O': {
+              img.src = "./img/1_1_5.png";
+              eau.innerText = "Intermediate";
+              nomo.innerText = "Intermediate";
+              this.eautagIntermediate();
+              this.nomotagIntermediate();
+              break;
+            }
+            case 'P': {
               img.src = "./img/2_1_0.png";
               eau.innerText = "High";
               nomo.innerText = "Intermediate";
@@ -385,23 +447,7 @@
               this.nomotagIntermediate();
               break;
             }
-            case 'M': {
-              img.src = "./img/2_1_1.png";
-              eau.innerText = "High";
-              nomo.innerText = "Intermediate";
-              this.eautagHigh();
-              this.nomotagIntermediate();
-              break;
-            }
-            case 'N': {
-              img.src = "./img/2_1_2.png";
-              eau.innerText = "High";
-              nomo.innerText = "Intermediate";
-              this.eautagHigh();
-              this.nomotagIntermediate();
-              break;
-            }
-            case 'O': {
+            case 'Q': {
               img.src = "./img/2_2_0.png";
               eau.innerText = "High";
               nomo.innerText = "High";
@@ -409,7 +455,7 @@
               this.nomotagHigh();
               break;
             }
-            case 'P': {
+            case 'R': {
               img.src = "./img/2_2_1.png";
               eau.innerText = "High";
               nomo.innerText = "High";
@@ -417,7 +463,7 @@
               this.nomotagHigh();
               break;
             }
-            case 'Q': {
+            case 'S': {
               img.src = "./img/2_2_2.png";
               eau.innerText = "High";
               nomo.innerText = "High";
@@ -425,7 +471,7 @@
               this.nomotagHigh();
               break;
             }
-            case 'R': {
+            case 'T': {
               img.src = "./img/2_2_3.png";
               eau.innerText = "High";
               nomo.innerText = "High";
@@ -433,7 +479,7 @@
               this.nomotagHigh();
               break;
             }
-            case 'S': {
+            case 'U': {
               img.src = "./img/2_2_4.png";
               eau.innerText = "High";
               nomo.innerText = "High";
@@ -441,8 +487,40 @@
               this.nomotagHigh();
               break;
             }
-            case 'T': {
+            case 'V': {
               img.src = "./img/2_2_5.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'W': {
+              img.src = "./img/2_2_6.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'X': {
+              img.src = "./img/2_2_7.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'Y': {
+              img.src = "./img/2_2_8.png";
+              eau.innerText = "High";
+              nomo.innerText = "High";
+              this.eautagHigh();
+              this.nomotagHigh();
+              break;
+            }
+            case 'Z': {
+              img.src = "./img/2_2_9.png";
               eau.innerText = "High";
               nomo.innerText = "High";
               this.eautagHigh();
